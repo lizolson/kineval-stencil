@@ -28,7 +28,7 @@
         "depth-first","breadth-first","greedy-best-first","A-star",
         "RRT","RRT-connect","RRT-star"
       planning_scene: string specifying choice of 2D world, as one of:
-        "empty","misc","narrow1","narrow2","three_sections"
+        "scenes/empty.js","scenes/misc.js","scenes/narrow1.js","scenes/narrow2.js","scenes/three_sections.js"
       q_init: 2-element 1D array with coordinates of start location
       q_goal: 2-element 1D array with coordinates of goal location
       eps: "epsilon" number for search spatial resolution of graph
@@ -39,7 +39,7 @@
     these parameters can be specified in the URL as parameter assignments
     separated by question marks, as in the following example:
 
-      search_canvas.html?search_alg=A-star?planning_scene=misc?q_init=[0,0]?q_goal=[4,4]?eps=0.1
+      search_canvas.html?search_alg=A-star?planning_scene=scenes/misc.js?q_init=[0,0]?q_goal=[4,4]?eps=0.1
 
 |\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/|
 ||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/||\/
@@ -61,6 +61,50 @@
     <canvas id="myCanvas" width=800 height=800 style="z-index: 10 ;border:1px solid #000000;">
     </canvas>
 
+    <script>
+      // setting environment variable defaults:
+
+      // specify default search algorithm to use for planning
+      //search_alg = "depth-first";
+      //search_alg = "breadth-first";
+      //search_alg = "greedy-best-first";
+      search_alg = "A-star";
+      //search_alg = "RRT";
+      //search_alg = "RRT-connect";
+      //search_alg = "RRT-star";
+
+      // specify default the world for the planner
+      //  (stored as "range" global variable with name "planning_scene")
+      //planning_scene = "scenes/empty.js";
+      planning_scene = "scenes/misc.js";
+      //planning_scene = "scenes/narrow1.js";
+      //planning_scene = "scenes/narrow2.js";
+      //planning_scene = "scenes/three_sections.js";
+
+      // specify default eps (epsilon) spatial resolution variable
+      //   for RRT, specifies threshold radius for step size and reaching goal
+      eps = 0.1;
+      
+      // parse user input
+      var url_parsed = window.location.href.split("?");
+      for (i=1;i<url_parsed.length;i++) {
+        var param_parsed = url_parsed[i].split("=");
+        if ((param_parsed[0] !== "search_alg")&&(param_parsed[0] !== "planning_scene")&&(param_parsed[0] !== "color_scheme"))
+            eval(param_parsed[0]+"="+param_parsed[1]);
+        else
+            eval(param_parsed[0]+"=\'"+param_parsed[1]+"\'");
+      }
+      
+      // load planning scene src files dynamically
+      if (typeof planning_scene !== 'undefined')
+          obstaclesElement = document.createElement('script');
+          obstaclesElement.setAttribute("type","text/javascript");
+          obstaclesElement.setAttribute("src",planning_scene);
+  
+          if (typeof obstaclesElement !== 'undefined') {
+              document.getElementsByTagName("head")[0].appendChild(obstaclesElement);
+          }
+    </script>
   </body>
 </html>
 

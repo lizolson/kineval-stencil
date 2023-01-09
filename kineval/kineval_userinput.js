@@ -10,7 +10,7 @@ kineval.initKeyEvents = function init_keyboard_events() {
 
 kineval.handleKeydown = function handle_keydown(keycode) {
     //console.log("handle_keydown: "+keycode);
-    switch (keycode) { // h:72 j:74 k:75 l:76
+    switch (keycode) { // j:74 k:75 l:76 ;:186
     case 74: // j 
         kineval.changeActiveLinkDown();
         break;
@@ -20,7 +20,7 @@ kineval.handleKeydown = function handle_keydown(keycode) {
     case 76: // l
         kineval.changeActiveLinkNext();
         break;
-    case 72: // h
+    case 186: // ;
         kineval.changeActiveLinkPrevious();
         break;
     case 84: // t
@@ -236,25 +236,25 @@ kineval.handleUserInput = function user_input() {
 }
 
 kineval.displayHelp = function display_help () {
-        textbar.innerHTML = "kineval user interface commands" 
-            + "<br>mouse: rotate camera about robot base "
-            + "<br>z/x : camera zoom with respect to base "
-            + "<br>t : toggle starting point mode "
-            + "<br>w/s a/d q/e : move base along forward/turning/strafe direction"
-            + "<br>j/k/l : focus active joint to child/parent/sibling "
-            + "<br>u/i : control active joint"
-            + "<br>c : execute clock tick controller "
-            + "<br>o : control robot arm to current setpoint target "
-            + "<br>0 : control arm to zero pose "
-            + "<br>Shift+[1-9] : assign current pose to a pose setpoint"
-            + "<br>[1-9] : assign a pose setpoint to current setpoint target"
-            + "<br>g : print pose setpoints to console "
-            + "<br>p : iterate inverse kinematics motion "
-            + "<br>r/f : move inverse kinematics target up/down"
-            + "<br>m : invoke motion planner "
-            + "<br>n/b : show next/previous pose in motion plan "
-            + "<br>h : toggle gui command widget ";
-            + "<br>v : print commands to screen ";
+    textbar.innerHTML = "kineval user interface commands" 
+    + "<pre>       mouse : rotate camera about robot base "
+    + "<br>         z/x : camera zoom with respect to base "
+    + "<br>           t : toggle starting point mode "
+    + "<br> w/s a/d q/e : move base along forward/turning/strafe direction"
+    + "<br>     j/k/l/; : focus active joint to child/parent/sibling "
+    + "<br>         u/i : control active joint"
+    + "<br>           c : execute clock tick controller "
+    + "<br>           o : control robot arm to current setpoint target "
+    + "<br>           0 : control arm to zero pose "
+    + "<br> Shift+[1-9] : assign current pose to a pose setpoint"
+    + "<br>       [1-9] : assign a pose setpoint to current setpoint target"
+    + "<br>           g : print pose setpoints to console "
+    + "<br>           p : iterate inverse kinematics motion "
+    + "<br>         r/f : move inverse kinematics target up/down"
+    + "<br>           m : invoke motion planner "
+    + "<br>         n/b : show next/previous pose in motion plan "
+    + "<br>           h : toggle gui command widget "
+    + "<br>           v : print commands to screen </pre>";
 }
 
 
@@ -265,7 +265,7 @@ kineval.toggleStartpointMode = function toggle_startpoint_mode() {
 
 
 kineval.changeActiveLinkDown = function change_active_link_down() {
-    if (typeof robot.links[robot.joints[kineval.params.active_joint].child].children !== 'undefined') {
+    if (typeof robot.links[robot.joints[kineval.params.active_joint].child].children[0] !== 'undefined') {
         kineval.params.active_link = robot.joints[kineval.params.active_joint].child;
         kineval.params.active_joint = robot.links[kineval.params.active_link].children[0];
         textbar.innerHTML = kineval.params.active_joint + " is now the active joint";

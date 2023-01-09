@@ -139,36 +139,12 @@ function setPlanningScene() {
     range[2] = [ [-1.8,-1], [-1.8,5.8] ];
     range[3] = [ [5,5.8],   [-1.8,5.8] ];
 
-    if (typeof planning_scene === 'undefined')
-        planning_scene = 'empty';
-
-    if (planning_scene == 'misc') {
-        /*  misc stuff with narrow opening */
-        range[4] = [ [1,2],[1,2] ];
-        range[5] = [ [3,3.3],[1,4] ];
-        range[6] = [ [0.6,0.7],[0.4,0.7] ];
-        range[7] = [ [3.7,3.9],[-0.8,5] ];
-    }
-    else if (planning_scene == 'narrow1') {
-        /*  narrow path 1 */
-        range[4] = [ [1,3],[4,5] ];
-        range[5] = [ [1,3],[-1,2] ];
-        range[6] = [ [1,1.95],[2,3.8] ];
-    }
-    else if (planning_scene == 'narrow2') {
-        /*  narrow path 2 */
-        range[4] = [ [1,3],[4,5] ];
-        range[5] = [ [1,3],[-1,2] ];
-        range[6] = [ [1,1.9],[2,3.8] ];
-        range[7] = [ [2.1,3],[2.2,4] ];
-    }
-    else if (planning_scene == 'three_sections') {
-        /*  three compartments */
-        range[4] = [ [1,1.3],[4,5] ];
-        range[5] = [ [1,1.3],[-1,3.5] ];
-        range[6] = [ [2.7,3],[-1,0] ];
-        range[7] = [ [2.7,3],[.5,5] ];
-    }
+    // check for undefined obstacles
+    if (obstacles === 'undefined')
+    return
+    
+    // add obstacles dynamically loaded from src=planning_scene in search_canvas.html
+    range = range.concat(obstacles)
 }
 
 //////////////////////////////////////////////////
@@ -189,27 +165,6 @@ function init() {
 }
 
 function initSearch() {
-
-    // specify default search algorithm to use for planning
-    //search_alg = "depth-first";
-    //search_alg = "breadth-first";
-    //search_alg = "greedy-best-first";
-    search_alg = "A-star";
-    //search_alg = "RRT";
-    //search_alg = "RRT-connect";
-    //search_alg = "RRT-star";
-
-    // specify default the world for the planner
-    //  (stored as "range" global variable with name "planning_scene")
-    //planning_scene = "empty";
-    planning_scene = "misc";
-    //planning_scene = "narrow1";
-    //planning_scene = "narrow2";
-    //planning_scene = "three_sections";
-
-    // specify default eps (epsilon) spatial resolution variable
-    //   for RRT, specifies threshold radius for step size and reaching goal
-    eps = 0.1;
 
     // create event handlers for the mouse
     canvas = document.getElementById("myCanvas");
@@ -244,17 +199,6 @@ function initSearch() {
     prev_q_goal = [10000,1000];
 
     color_scheme = "default";
-
-    var url_parsed = window.location.href.split("?");
-    for (i=1;i<url_parsed.length;i++) {
-        var param_parsed = url_parsed[i].split("=");
-        //eval(param_parsed[0]+"=\'"+param_parsed[1]+"\'");
-        if ((param_parsed[0] !== "search_alg")&&(param_parsed[0] !== "planning_scene")&&(param_parsed[0] !== "color_scheme"))
-            eval(param_parsed[0]+"="+param_parsed[1]);
-        else
-            eval(param_parsed[0]+"=\'"+param_parsed[1]+"\'");
-    }
-
 
     // set up the color constants
     initColorScheme(color_scheme);

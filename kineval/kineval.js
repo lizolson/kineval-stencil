@@ -814,30 +814,30 @@ kineval.initWorldPlanningScene = function initWorldPlanningScene() {
 
     temp_geom = new THREE.CubeGeometry(robot_boundary[1][0]-robot_boundary[0][0],0.2,0.2);
     temp_mesh = new THREE.Mesh(temp_geom, temp_material);
-    temp_mesh.position.x = (robot_boundary[1][0]+robot_boundary[0][0])/2;
-    temp_mesh.position.y = 0;
+    temp_mesh.position.x = (robot_boundary[1][0]+robot_boundary[0][0])/2+0.1;
+    temp_mesh.position.y = 0.1;
     temp_mesh.position.z = robot_boundary[0][2];
     scene.add(temp_mesh);
 
     temp_geom = new THREE.CubeGeometry(robot_boundary[1][0]-robot_boundary[0][0],0.2,0.2);
     temp_mesh = new THREE.Mesh(temp_geom, temp_material);
-    temp_mesh.position.x = (robot_boundary[1][0]+robot_boundary[0][0])/2;
-    temp_mesh.position.y = 0;
+    temp_mesh.position.x = (robot_boundary[1][0]+robot_boundary[0][0])/2-0.1;
+    temp_mesh.position.y = 0.1;
     temp_mesh.position.z = robot_boundary[1][2];
     scene.add(temp_mesh);
 
     temp_geom = new THREE.CubeGeometry(0.2,0.2,robot_boundary[1][2]-robot_boundary[0][2]);
     temp_mesh = new THREE.Mesh(temp_geom, temp_material);
     temp_mesh.position.x = robot_boundary[0][0];
-    temp_mesh.position.y = 0;
-    temp_mesh.position.z = (robot_boundary[1][2]+robot_boundary[0][2])/2;
+    temp_mesh.position.y = 0.1;
+    temp_mesh.position.z = (robot_boundary[1][2]+robot_boundary[0][2])/2-0.1;
     scene.add(temp_mesh);
 
     temp_geom = new THREE.CubeGeometry(0.2,0.2,robot_boundary[1][2]-robot_boundary[0][2]);
     temp_mesh = new THREE.Mesh(temp_geom, temp_material);
     temp_mesh.position.x = robot_boundary[1][0];
-    temp_mesh.position.y = 0;
-    temp_mesh.position.z = (robot_boundary[1][2]+robot_boundary[0][2])/2;
+    temp_mesh.position.y = 0.1;
+    temp_mesh.position.z = (robot_boundary[1][2]+robot_boundary[0][2])/2+0.1;
     scene.add(temp_mesh);
  
     // set rendering geometries of world obstacles
