@@ -1,0 +1,4 @@
+<launch>
+    <!-- <include file="$(find fetch_gazebo)/launch/playground.launch" /> -->
+    <node name="fetch_controller_node" pkg="fetch_controller" type="main_controller" output="screen" cwd="node"/>
+</launch>

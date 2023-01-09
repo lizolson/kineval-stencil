@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(fetch_teleop_depth)
+project(fetch_controller)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -36,23 +36,15 @@ catkin_package(
 include_directories(${catkin_INCLUDE_DIRS})
 message(${catkin_INCLUDE_DIRS})
 
-##teleop publisher executable
-add_executable(teleop_publisher src/teleop_publisher.cpp)
-add_dependencies(teleop_publisher ${catkin_EXPORTED_TARGETS})
-#target_include_directories(teleop_publisher PUBLIC 
-#  ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries(teleop_publisher
-   ${catkin_LIBRARIES}
- )
  
-#scan subscriber executable
-add_executable(scan_subscriber 
-src/Laser_Scan_Handler.cpp  
-src/scan_subscriber.cpp)
-add_dependencies(scan_subscriber ${catkin_EXPORTED_TARGETS})
-target_include_directories(scan_subscriber PUBLIC 
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/fetch_teleop_depth)
-target_link_libraries(scan_subscriber
+#fetch controller executable
+add_executable(main_controller
+src/Fetch_Controller.cpp  
+src/main_controller.cpp)
+add_dependencies(main_controller ${catkin_EXPORTED_TARGETS})
+target_include_directories(main_controller PUBLIC 
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/fetch_controller)
+target_link_libraries(main_controller
    ${catkin_LIBRARIES}
  )
 

@@ -1,5 +1,0 @@
-<launch>
-    <!-- <include file="$(find fetch_gazebo)/launch/playground.launch" /> -->
-    <node name="teleop_twist_keyboard" pkg="fetch_teleop_depth" type="teleop_publisher" output="screen" cwd="node"/>
-    <node name="laser_scan_node" pkg="fetch_teleop_depth" type="scan_subscriber" output="screen" cwd="node"/>
-</launch>
