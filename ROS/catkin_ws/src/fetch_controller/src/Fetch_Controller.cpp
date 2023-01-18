@@ -4,8 +4,8 @@ Fetch_Controller::Fetch_Controller(ros::NodeHandle &nh)
 {
     nh_ = nh;
 
-    //TODO: initialize a subscriber that is set to the channel "/base_scan". Set its callback function to be Laser_Scan_Callback
-    //TODO: initialize a publisher that is set to the channel "/cmd_vel"
+    //TODO: initialize a subscriber that is set to the topic "/base_scan". Set its callback function to be Laser_Scan_Callback
+    //TODO: initialize a publisher that is set to the topic "/cmd_vel"
 
 
 }
